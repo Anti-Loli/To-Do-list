@@ -1,7 +1,11 @@
+using ToDoList;
+
 namespace TimCoreyWinFormDemo
 {
     public partial class Form1 : Form
     {
+        ToDoTask1 task1 = new ToDoTask1();
+
         public Form1()
         {
             InitializeComponent();
@@ -9,26 +13,31 @@ namespace TimCoreyWinFormDemo
 
         private void button5_Click(object sender, EventArgs e)
         {
-            string task = textBox1.Text;
-            if (!string.IsNullOrEmpty(task))
-            {
-                listBox1.Items.Add(task);
-                textBox1.Clear();
-                textBox1.Focus();
-            }
-            else
-            {
-                MessageBox.Show("Please enter a task.");
-            }
+            /* string task = textBox1.Text;
+             if (!string.IsNullOrEmpty(task))
+             {
+                 checkedListBox1.Items.Add(task);
+                 textBox1.Clear();
+                 textBox1.Focus();
+             }
+             else
+             {
+                 MessageBox.Show("Please enter a task.");
+             }*/
+
+            task1.setTaskName(textBox1.Text);
+            task1.setTaskDate(monthCalendar1.SelectionRange.Start.ToString("MM/dd/yyyy"));
+
+            checkedListBox1.Items.Add(task1.ToString());
         }
 
         private void button6_Click(object sender, EventArgs e)
         {
-            int selectedTask = listBox1.SelectedIndex;
+            int selectedTask = checkedListBox1.SelectedIndex;
 
             if (selectedTask != -1)
             {
-                listBox1.Items.RemoveAt(selectedTask);
+                checkedListBox1.Items.RemoveAt(selectedTask);
             }
             else
             {
@@ -40,17 +49,31 @@ namespace TimCoreyWinFormDemo
         {
             if (e.KeyChar == (char)Keys.Enter)
             {
-                button5.PerformClick();
+                AddTaskButton.PerformClick();
                 e.Handled = true;
             }
 
         }
 
-        private void listBox1_KeyPress(object sender, KeyPressEventArgs e)
+        private void checkedListBox1_KeyPress(object sender, KeyPressEventArgs e)
         {
             if (e.KeyChar == (char)Keys.Enter)
             {
-                button6.PerformClick();
+                RemoveTaskButton.PerformClick();
+                e.Handled = true;
+            }
+        }
+
+        private void checkedListBox1_ItemCheck(object sender, ItemCheckEventArgs e)
+        {
+
+        }
+
+        private void monthCalendar1_KeyPress(object sender, KeyPressEventArgs e)
+        {
+            if (e.KeyChar == (char)Keys.Enter)
+            {
+                AddTaskButton.PerformClick();
                 e.Handled = true;
             }
         }
