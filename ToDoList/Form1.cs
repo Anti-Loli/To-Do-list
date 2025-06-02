@@ -5,6 +5,7 @@ namespace TimCoreyWinFormDemo
     public partial class Form1 : Form
     {
         ToDoTask1 task1 = new ToDoTask1();
+        List<ToDoTask1> tasks;
 
         public Form1()
         {
@@ -13,22 +14,12 @@ namespace TimCoreyWinFormDemo
 
         private void button5_Click(object sender, EventArgs e)
         {
-            /* string task = textBox1.Text;
-             if (!string.IsNullOrEmpty(task))
-             {
-                 checkedListBox1.Items.Add(task);
-                 textBox1.Clear();
-                 textBox1.Focus();
-             }
-             else
-             {
-                 MessageBox.Show("Please enter a task.");
-             }*/
-
             task1.setTaskName(textBox1.Text);
             task1.setTaskDate(monthCalendar1.SelectionRange.Start.ToString("MM/dd/yyyy"));
 
             checkedListBox1.Items.Add(task1.ToString());
+
+            tasks.Add(task1);
         }
 
         private void button6_Click(object sender, EventArgs e)
@@ -76,6 +67,11 @@ namespace TimCoreyWinFormDemo
                 AddTaskButton.PerformClick();
                 e.Handled = true;
             }
+        }
+
+        private void SaveTaskButton_Click(object sender, EventArgs e)
+        {
+            
         }
     }
 }

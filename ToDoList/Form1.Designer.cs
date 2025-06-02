@@ -36,6 +36,7 @@
             checkedListBox1 = new CheckedListBox();
             label2 = new Label();
             label3 = new Label();
+            SaveTaskButton = new Button();
             SuspendLayout();
             // 
             // label1
@@ -112,11 +113,22 @@
             label3.TabIndex = 9;
             label3.Text = "Due Date:";
             // 
+            // SaveTaskButton
+            // 
+            SaveTaskButton.Location = new Point(414, 366);
+            SaveTaskButton.Name = "SaveTaskButton";
+            SaveTaskButton.Size = new Size(103, 23);
+            SaveTaskButton.TabIndex = 10;
+            SaveTaskButton.Text = "Save Tasks";
+            SaveTaskButton.UseVisualStyleBackColor = true;
+            SaveTaskButton.Click += SaveTaskButton_Click;
+            // 
             // Form1
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
             ClientSize = new Size(598, 450);
+            Controls.Add(SaveTaskButton);
             Controls.Add(label3);
             Controls.Add(label2);
             Controls.Add(checkedListBox1);
@@ -140,5 +152,6 @@
         private CheckedListBox checkedListBox1;
         private Label label2;
         private Label label3;
+        private Button SaveTaskButton;
     }
 }

@@ -8,12 +8,13 @@ namespace ToDoList
 {
     internal class ToDoTask1
     {
-        string? taskName;
-        string? taskDate;
+        public string? taskName;
+        public string? taskDate;
 
-        public void ToDoTask()
+        public void ToDoTask(string name, string date)
         {
-
+            taskName = name;
+            taskDate = date;
         }
 
         public void setTaskName(string name)
