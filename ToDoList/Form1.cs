@@ -1,11 +1,15 @@
 using ToDoList;
+using Newtonsoft.Json;
+using System.Diagnostics;
+using Newtonsoft.Json.Linq;
 
 namespace TimCoreyWinFormDemo
 {
     public partial class Form1 : Form
     {
         ToDoTask1 task1 = new ToDoTask1();
-        List<ToDoTask1> tasks;
+        List<ToDoTask1> tasks = new List<ToDoTask1>();
+        string filePath = Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments) + "\\tasklist.json";
 
         public Form1()
         {
@@ -14,12 +18,18 @@ namespace TimCoreyWinFormDemo
 
         private void button5_Click(object sender, EventArgs e)
         {
-            task1.setTaskName(textBox1.Text);
-            task1.setTaskDate(monthCalendar1.SelectionRange.Start.ToString("MM/dd/yyyy"));
+            var newTask = new ToDoTask1();
+            newTask.setTaskName(textBox1.Text);
+            newTask.setTaskDate(monthCalendar1.SelectionRange.Start.ToString("MM/dd/yyyy"));
 
-            checkedListBox1.Items.Add(task1.ToString());
+            tasks.Add(newTask);
+            checkedListBox1.Items.Add(newTask.ToString());
 
-            tasks.Add(task1);
+            string json = JsonConvert.SerializeObject(tasks, Formatting.Indented);
+
+            textBox1.Text = "";
+
+            File.WriteAllText(filePath, json);
         }
 
         private void button6_Click(object sender, EventArgs e)
@@ -29,6 +39,14 @@ namespace TimCoreyWinFormDemo
             if (selectedTask != -1)
             {
                 checkedListBox1.Items.RemoveAt(selectedTask);
+
+                string jsonUpdate = File.ReadAllText(filePath);
+
+                JArray jsonArray = JArray.Parse(jsonUpdate);
+
+                jsonArray.RemoveAt(selectedTask);
+
+                File.WriteAllText(filePath, jsonArray.ToString());
             }
             else
             {
@@ -69,9 +87,23 @@ namespace TimCoreyWinFormDemo
             }
         }
 
-        private void SaveTaskButton_Click(object sender, EventArgs e)
+        private void Form1_Load(object sender, EventArgs e)
         {
-            
+            string startFilePath = Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments) + "\\tasklist.json";
+
+            if (File.Exists(filePath))
+            {
+                string json = File.ReadAllText(startFilePath);
+
+                List<ToDoTask1> startTasks = JsonConvert.DeserializeObject<List<ToDoTask1>>(json);
+
+                foreach (var task in startTasks)
+                {
+                    checkedListBox1.Items.Add(task.ToString());
+                }
+
+                tasks = JsonConvert.DeserializeObject<List<ToDoTask1>>(json);
+            }
         }
     }
 }

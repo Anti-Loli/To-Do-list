@@ -36,32 +36,33 @@
             checkedListBox1 = new CheckedListBox();
             label2 = new Label();
             label3 = new Label();
-            SaveTaskButton = new Button();
             SuspendLayout();
             // 
             // label1
             // 
             label1.AutoSize = true;
             label1.Font = new Font("Segoe UI", 21.75F, FontStyle.Regular, GraphicsUnit.Point, 0);
-            label1.Location = new Point(220, 9);
+            label1.Location = new Point(251, 12);
             label1.Name = "label1";
-            label1.Size = new Size(142, 40);
+            label1.Size = new Size(182, 50);
             label1.TabIndex = 1;
             label1.Text = "To Do List";
             // 
             // textBox1
             // 
-            textBox1.Location = new Point(105, 93);
+            textBox1.Location = new Point(120, 124);
+            textBox1.Margin = new Padding(3, 4, 3, 4);
             textBox1.Name = "textBox1";
-            textBox1.Size = new Size(227, 23);
+            textBox1.Size = new Size(259, 27);
             textBox1.TabIndex = 3;
             textBox1.KeyPress += textBox1_KeyPress;
             // 
             // AddTaskButton
             // 
-            AddTaskButton.Location = new Point(147, 327);
+            AddTaskButton.Location = new Point(168, 436);
+            AddTaskButton.Margin = new Padding(3, 4, 3, 4);
             AddTaskButton.Name = "AddTaskButton";
-            AddTaskButton.Size = new Size(103, 23);
+            AddTaskButton.Size = new Size(118, 31);
             AddTaskButton.TabIndex = 4;
             AddTaskButton.Text = "Add Task";
             AddTaskButton.UseVisualStyleBackColor = true;
@@ -69,9 +70,10 @@
             // 
             // RemoveTaskButton
             // 
-            RemoveTaskButton.Location = new Point(414, 327);
+            RemoveTaskButton.Location = new Point(473, 436);
+            RemoveTaskButton.Margin = new Padding(3, 4, 3, 4);
             RemoveTaskButton.Name = "RemoveTaskButton";
-            RemoveTaskButton.Size = new Size(103, 23);
+            RemoveTaskButton.Size = new Size(118, 31);
             RemoveTaskButton.TabIndex = 5;
             RemoveTaskButton.Text = "Remove Task";
             RemoveTaskButton.UseVisualStyleBackColor = true;
@@ -79,7 +81,8 @@
             // 
             // monthCalendar1
             // 
-            monthCalendar1.Location = new Point(105, 143);
+            monthCalendar1.Location = new Point(120, 191);
+            monthCalendar1.Margin = new Padding(10, 12, 10, 12);
             monthCalendar1.MaxSelectionCount = 1;
             monthCalendar1.Name = "monthCalendar1";
             monthCalendar1.TabIndex = 6;
@@ -88,9 +91,10 @@
             // checkedListBox1
             // 
             checkedListBox1.FormattingEnabled = true;
-            checkedListBox1.Location = new Point(361, 52);
+            checkedListBox1.Location = new Point(413, 69);
+            checkedListBox1.Margin = new Padding(3, 4, 3, 4);
             checkedListBox1.Name = "checkedListBox1";
-            checkedListBox1.Size = new Size(208, 256);
+            checkedListBox1.Size = new Size(237, 334);
             checkedListBox1.TabIndex = 7;
             checkedListBox1.ItemCheck += checkedListBox1_ItemCheck;
             checkedListBox1.KeyPress += checkedListBox1_KeyPress;
@@ -98,37 +102,26 @@
             // label2
             // 
             label2.AutoSize = true;
-            label2.Location = new Point(60, 96);
+            label2.Location = new Point(69, 128);
             label2.Name = "label2";
-            label2.Size = new Size(33, 15);
+            label2.Size = new Size(39, 20);
             label2.TabIndex = 8;
             label2.Text = "Task:";
             // 
             // label3
             // 
             label3.AutoSize = true;
-            label3.Location = new Point(35, 143);
+            label3.Location = new Point(40, 191);
             label3.Name = "label3";
-            label3.Size = new Size(58, 15);
+            label3.Size = new Size(75, 20);
             label3.TabIndex = 9;
             label3.Text = "Due Date:";
             // 
-            // SaveTaskButton
-            // 
-            SaveTaskButton.Location = new Point(414, 366);
-            SaveTaskButton.Name = "SaveTaskButton";
-            SaveTaskButton.Size = new Size(103, 23);
-            SaveTaskButton.TabIndex = 10;
-            SaveTaskButton.Text = "Save Tasks";
-            SaveTaskButton.UseVisualStyleBackColor = true;
-            SaveTaskButton.Click += SaveTaskButton_Click;
-            // 
             // Form1
             // 
-            AutoScaleDimensions = new SizeF(7F, 15F);
+            AutoScaleDimensions = new SizeF(8F, 20F);
             AutoScaleMode = AutoScaleMode.Font;
-            ClientSize = new Size(598, 450);
-            Controls.Add(SaveTaskButton);
+            ClientSize = new Size(683, 600);
             Controls.Add(label3);
             Controls.Add(label2);
             Controls.Add(checkedListBox1);
@@ -137,7 +130,9 @@
             Controls.Add(AddTaskButton);
             Controls.Add(textBox1);
             Controls.Add(label1);
+            Margin = new Padding(3, 4, 3, 4);
             Name = "Form1";
+            Load += Form1_Load;
             ResumeLayout(false);
             PerformLayout();
         }
@@ -152,6 +147,5 @@
         private CheckedListBox checkedListBox1;
         private Label label2;
         private Label label3;
-        private Button SaveTaskButton;
     }
 }
