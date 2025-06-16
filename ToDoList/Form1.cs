@@ -7,9 +7,13 @@ namespace TimCoreyWinFormDemo
 {
     public partial class Form1 : Form
     {
-        ToDoTask1 task1 = new ToDoTask1();
-        List<ToDoTask1> tasks = new List<ToDoTask1>();
-        string filePath = Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments) + "\\tasklist.json";
+        List<ToDoTask1> currentTaskList = new List<ToDoTask1>();//list for the tasks in the checkedlistbox object
+        List<ToDoTask1> completedTaskList = new List<ToDoTask1>();//list for the listbox object
+        //file path for the JSON file for the storage of the checkedlistbox(current) tasks
+        string currentTaskListFilePath = Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments) + "\\CurrentTasklist.json";
+        //file path for the JSON file for the storage of the listbox(completed) tasks 
+        string completedTaskListFilePath = Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments) + "\\CompletedTasklist.json";
+
 
         public Form1()
         {
@@ -18,47 +22,53 @@ namespace TimCoreyWinFormDemo
 
         private void button5_Click(object sender, EventArgs e)
         {
+            //creates a new ToDoTask1 object and sets it's Name, Date, and Status variables
             var newTask = new ToDoTask1();
             newTask.setTaskName(textBox1.Text);
             newTask.setTaskDate(monthCalendar1.SelectionRange.Start.ToString("MM/dd/yyyy"));
+            newTask.setTaskStatus(false);
 
-            tasks.Add(newTask);
-            checkedListBox1.Items.Add(newTask.ToString());
+            currentTaskList.Add(newTask);//adds the task to the currentTask list
+            checkedListBox1.Items.Add(newTask.ToString());//Adds the task name and date to the list using the ToDoTask1 ToString
 
-            string json = JsonConvert.SerializeObject(tasks, Formatting.Indented);
+            textBox1.Text = "";//Removes text from the text box
 
-            textBox1.Text = "";
 
-            File.WriteAllText(filePath, json);
+            string json = JsonConvert.SerializeObject(currentTaskList, Formatting.Indented);//Serializes the task to JSON
+            File.WriteAllText(currentTaskListFilePath, json);//writes text into JSON file for storage
         }
 
         private void button6_Click(object sender, EventArgs e)
         {
+            //Gets the index of the currently selected task
             int selectedTask = checkedListBox1.SelectedIndex;
 
-            if (selectedTask != -1)
+            if (selectedTask != -1)//Checks if a task was selected. If no then a messagebox is shown.
             {
-                checkedListBox1.Items.RemoveAt(selectedTask);
+                checkedListBox1.Items.RemoveAt(selectedTask);//Removes the task from the checkedListBox
 
-                string jsonUpdate = File.ReadAllText(filePath);
+                currentTaskList.RemoveAt(selectedTask);
 
-                JArray jsonArray = JArray.Parse(jsonUpdate);
+                string jsonUpdate = File.ReadAllText(currentTaskListFilePath);//Opens the JSON file
 
-                jsonArray.RemoveAt(selectedTask);
+                JArray jsonArray = JArray.Parse(jsonUpdate);//Parses the JSON array in the file
 
-                File.WriteAllText(filePath, jsonArray.ToString());
+                jsonArray.RemoveAt(selectedTask);//Removes the task at the same index as the task
+
+                File.WriteAllText(currentTaskListFilePath, jsonArray.ToString());//Closes the JSON file
             }
             else
             {
-                MessageBox.Show("Please select a task to remove.");
+                //Send message to user in case a task is not seleceted but they press the remove task button
+                MessageBox.Show("Please select a task from the task list to remove.");
             }
         }
 
         private void textBox1_KeyPress(object sender, KeyPressEventArgs e)
         {
-            if (e.KeyChar == (char)Keys.Enter)
+            if (e.KeyChar == (char)Keys.Enter)//checks if enter key was pressed 
             {
-                AddTaskButton.PerformClick();
+                AddTaskButton.PerformClick();//runs AddTaskButton method
                 e.Handled = true;
             }
 
@@ -66,44 +76,65 @@ namespace TimCoreyWinFormDemo
 
         private void checkedListBox1_KeyPress(object sender, KeyPressEventArgs e)
         {
-            if (e.KeyChar == (char)Keys.Enter)
+            if (e.KeyChar == (char)Keys.Enter)//checks if enter key was pressed 
             {
-                RemoveTaskButton.PerformClick();
+                RemoveTaskButton.PerformClick();//runs REmoveTaskButton method
                 e.Handled = true;
             }
         }
 
         private void checkedListBox1_ItemCheck(object sender, ItemCheckEventArgs e)
         {
+            int selectedTask = checkedListBox1.SelectedIndex;
 
+            if (selectedTask != -1)
+            {
+                currentTaskList.ElementAt(selectedTask).setTaskStatus(true);
+
+                string jsonUpdate = File.ReadAllText(currentTaskListFilePath);//Opens the JSON file
+
+                JArray jsonArray = JArray.Parse(jsonUpdate);//Parses the JSON array in the file
+
+                jsonArray.RemoveAt(selectedTask);//Removes the task at the same index as the task
+
+                File.WriteAllText(currentTaskListFilePath, jsonArray.ToString());//Closes the JSON file
+
+                /*
+                 * takes task from currentTaskList and adds it to completedTaskList
+                 * then serializes completedTaskList to a seperate JSON file
+                 * updates UI accordingly
+                 */
+            }
         }
 
         private void monthCalendar1_KeyPress(object sender, KeyPressEventArgs e)
         {
-            if (e.KeyChar == (char)Keys.Enter)
+            if (e.KeyChar == (char)Keys.Enter)//checks if enter key was pressed 
             {
-                AddTaskButton.PerformClick();
+                AddTaskButton.PerformClick();//runs AddTaskButton method
                 e.Handled = true;
             }
         }
 
         private void Form1_Load(object sender, EventArgs e)
         {
-            string startFilePath = Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments) + "\\tasklist.json";
+            //gets file path for the task lists
+            string loadCurrentTaskListFilePath = Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments) + "\\CurrentTasklist.json";
 
-            if (File.Exists(filePath))
+            if (File.Exists(currentTaskListFilePath))//checks that the file path exists. 
             {
-                string json = File.ReadAllText(startFilePath);
+                string json = File.ReadAllText(loadCurrentTaskListFilePath);//opens JSOn file
 
-                List<ToDoTask1> startTasks = JsonConvert.DeserializeObject<List<ToDoTask1>>(json);
+                currentTaskList = JsonConvert.DeserializeObject<List<ToDoTask1>>(json);
 
-                foreach (var task in startTasks)
+                //adds each task in JSON file into checkedBoxList(current task list)
+                foreach (var task in currentTaskList)
                 {
                     checkedListBox1.Items.Add(task.ToString());
                 }
-
-                tasks = JsonConvert.DeserializeObject<List<ToDoTask1>>(json);
             }
+
+            //add code to fill completed task list in load
         }
     }
 }

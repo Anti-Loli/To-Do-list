@@ -10,11 +10,13 @@ namespace ToDoList
     {
         public string? taskName;
         public string? taskDate;
+        public bool taskStatus; 
 
         public void ToDoTask(string name, string date)
         {
             taskName = name;
             taskDate = date;
+            taskStatus = false;
         }
 
         public void setTaskName(string name)
@@ -25,6 +27,11 @@ namespace ToDoList
         public void setTaskDate(string date)
         {
             taskDate = date;
+        }
+
+        public void setTaskStatus(bool status)
+        {
+            taskStatus = status; 
         }
 
         public override string ToString()
