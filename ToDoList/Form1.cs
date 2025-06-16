@@ -125,7 +125,7 @@ namespace TimCoreyWinFormDemo
             {
                 string json = File.ReadAllText(loadCurrentTaskListFilePath);//opens JSOn file
 
-                currentTaskList = JsonConvert.DeserializeObject<List<ToDoTask1>>(json);
+                currentTaskList = JsonConvert.DeserializeObject<List<ToDoTask1>>(json);//deserializes list into the currentTaskList list
 
                 //adds each task in JSON file into checkedBoxList(current task list)
                 foreach (var task in currentTaskList)
