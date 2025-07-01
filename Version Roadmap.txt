@@ -1,0 +1,26 @@
+0.2.0
+Due dates for tasks
+
+0.3.0
+Persistent task storage
+
+0.4.0
+Task completion
+
+0.5.0
+Task Tags and Task sorting
+
+0.6.0
+Give notifications for due dates
+
+0.7.0
+Edit existing tasks
+
+0.8.0
+UI improvements
+
+0.9.0
+User feedback
+
+1.0.0
+Final bug fixes
