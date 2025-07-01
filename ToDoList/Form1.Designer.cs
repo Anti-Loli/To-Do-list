@@ -45,27 +45,25 @@
             // 
             label1.AutoSize = true;
             label1.Font = new Font("Segoe UI", 21.75F, FontStyle.Regular, GraphicsUnit.Point, 0);
-            label1.Location = new Point(327, 9);
+            label1.Location = new Point(286, 7);
             label1.Name = "label1";
-            label1.Size = new Size(182, 50);
+            label1.Size = new Size(142, 40);
             label1.TabIndex = 1;
             label1.Text = "To Do List";
             // 
             // textBox1
             // 
-            textBox1.Location = new Point(114, 79);
-            textBox1.Margin = new Padding(3, 4, 3, 4);
+            textBox1.Location = new Point(100, 59);
             textBox1.Name = "textBox1";
-            textBox1.Size = new Size(259, 27);
+            textBox1.Size = new Size(227, 23);
             textBox1.TabIndex = 3;
             textBox1.KeyPress += textBox1_KeyPress;
             // 
             // AddTaskButton
             // 
-            AddTaskButton.Location = new Point(168, 369);
-            AddTaskButton.Margin = new Padding(3, 4, 3, 4);
+            AddTaskButton.Location = new Point(147, 277);
             AddTaskButton.Name = "AddTaskButton";
-            AddTaskButton.Size = new Size(118, 31);
+            AddTaskButton.Size = new Size(103, 23);
             AddTaskButton.TabIndex = 4;
             AddTaskButton.Text = "Add Task";
             AddTaskButton.UseVisualStyleBackColor = true;
@@ -73,10 +71,9 @@
             // 
             // RemoveTaskButton
             // 
-            RemoveTaskButton.Location = new Point(523, 421);
-            RemoveTaskButton.Margin = new Padding(3, 4, 3, 4);
+            RemoveTaskButton.Location = new Point(458, 316);
             RemoveTaskButton.Name = "RemoveTaskButton";
-            RemoveTaskButton.Size = new Size(118, 31);
+            RemoveTaskButton.Size = new Size(103, 23);
             RemoveTaskButton.TabIndex = 5;
             RemoveTaskButton.Text = "Remove Task";
             RemoveTaskButton.UseVisualStyleBackColor = true;
@@ -84,8 +81,7 @@
             // 
             // monthCalendar1
             // 
-            monthCalendar1.Location = new Point(114, 146);
-            monthCalendar1.Margin = new Padding(10, 12, 10, 12);
+            monthCalendar1.Location = new Point(100, 110);
             monthCalendar1.MaxSelectionCount = 1;
             monthCalendar1.Name = "monthCalendar1";
             monthCalendar1.TabIndex = 6;
@@ -94,10 +90,9 @@
             // checkedListBox1
             // 
             checkedListBox1.FormattingEnabled = true;
-            checkedListBox1.Location = new Point(413, 79);
-            checkedListBox1.Margin = new Padding(3, 4, 3, 4);
+            checkedListBox1.Location = new Point(361, 59);
             checkedListBox1.Name = "checkedListBox1";
-            checkedListBox1.Size = new Size(345, 334);
+            checkedListBox1.Size = new Size(302, 238);
             checkedListBox1.TabIndex = 7;
             checkedListBox1.ItemCheck += checkedListBox1_ItemCheck;
             checkedListBox1.KeyPress += checkedListBox1_KeyPress;
@@ -105,53 +100,57 @@
             // label2
             // 
             label2.AutoSize = true;
-            label2.Location = new Point(63, 83);
+            label2.Location = new Point(55, 62);
             label2.Name = "label2";
-            label2.Size = new Size(39, 20);
+            label2.Size = new Size(33, 15);
             label2.TabIndex = 8;
             label2.Text = "Task:";
             // 
             // label3
             // 
             label3.AutoSize = true;
-            label3.Location = new Point(34, 146);
+            label3.Location = new Point(30, 110);
             label3.Name = "label3";
-            label3.Size = new Size(75, 20);
+            label3.Size = new Size(58, 15);
             label3.TabIndex = 9;
             label3.Text = "Due Date:";
             // 
             // listBox1
             // 
             listBox1.FormattingEnabled = true;
-            listBox1.Location = new Point(781, 89);
+            listBox1.ItemHeight = 15;
+            listBox1.Location = new Point(680, 59);
+            listBox1.Margin = new Padding(3, 2, 3, 2);
             listBox1.Name = "listBox1";
-            listBox1.Size = new Size(224, 324);
+            listBox1.Size = new Size(196, 244);
             listBox1.TabIndex = 10;
             // 
             // label4
             // 
             label4.AutoSize = true;
             label4.Font = new Font("Segoe UI", 13.8F, FontStyle.Regular, GraphicsUnit.Point, 0);
-            label4.Location = new Point(801, 55);
+            label4.Location = new Point(704, 22);
             label4.Name = "label4";
-            label4.Size = new Size(185, 31);
+            label4.Size = new Size(152, 25);
             label4.TabIndex = 11;
             label4.Text = "Completed Tasks";
             // 
             // CompletedTaskRemoveButton
             // 
-            CompletedTaskRemoveButton.Location = new Point(830, 423);
+            CompletedTaskRemoveButton.Location = new Point(727, 316);
+            CompletedTaskRemoveButton.Margin = new Padding(3, 2, 3, 2);
             CompletedTaskRemoveButton.Name = "CompletedTaskRemoveButton";
-            CompletedTaskRemoveButton.Size = new Size(118, 29);
+            CompletedTaskRemoveButton.Size = new Size(103, 22);
             CompletedTaskRemoveButton.TabIndex = 12;
             CompletedTaskRemoveButton.Text = "Delete List\r\n";
             CompletedTaskRemoveButton.UseVisualStyleBackColor = true;
+            CompletedTaskRemoveButton.Click += CompletedTaskRemoveButton_Click;
             // 
             // Form1
             // 
-            AutoScaleDimensions = new SizeF(8F, 20F);
+            AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
-            ClientSize = new Size(1043, 600);
+            ClientSize = new Size(913, 450);
             Controls.Add(CompletedTaskRemoveButton);
             Controls.Add(label4);
             Controls.Add(listBox1);
@@ -163,7 +162,6 @@
             Controls.Add(AddTaskButton);
             Controls.Add(textBox1);
             Controls.Add(label1);
-            Margin = new Padding(3, 4, 3, 4);
             Name = "Form1";
             Load += Form1_Load;
             ResumeLayout(false);
