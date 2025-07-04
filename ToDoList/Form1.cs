@@ -2,18 +2,18 @@ using ToDoList;
 using Newtonsoft.Json;
 using System.Diagnostics;
 using Newtonsoft.Json.Linq;
+using Tulpep.NotificationWindow;
 
 namespace TimCoreyWinFormDemo
 {
     public partial class Form1 : Form
     {
-        List<ToDoTask1> currentTaskList = new List<ToDoTask1>();//list for the tasks in the checkedlistbox object
-        List<ToDoTask1> completedTaskList = new List<ToDoTask1>();//list for the listbox object
+        List<ToDoTask> currentTaskList = new List<ToDoTask>();//list for the tasks in the checkedlistbox object
+        List<ToDoTask> completedTaskList = new List<ToDoTask>();//list for the listbox object
         //file path for the JSON file for the storage of the checkedlistbox(current) tasks
         string currentTaskListFilePath = Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments) + "\\CurrentTasklist.json";
         //file path for the JSON file for the storage of the listbox(completed) tasks 
         string completedTaskListFilePath = Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments) + "\\CompletedTasklist.json";
-
 
         public Form1()
         {
@@ -23,15 +23,12 @@ namespace TimCoreyWinFormDemo
         private void button5_Click(object sender, EventArgs e)//add task button
         {
             //creates a new ToDoTask1 object and sets it's Name, Date, and Status variables
-            var newTask = new ToDoTask1();
-            newTask.setTaskName(textBox1.Text);
-            newTask.setTaskDate(monthCalendar1.SelectionRange.Start.ToString("MM/dd/yyyy"));
+            var newTask = new ToDoTask(textBox1.Text, monthCalendar1.SelectionRange.Start.ToString("MM/dd/yyyy"), TagComboBox.Text, false);
 
             currentTaskList.Add(newTask);//adds the task to the currentTask list
             checkedListBox1.Items.Add(newTask.ToString());//Adds the task name and date to the list using the ToDoTask1 ToString
 
             textBox1.Text = "";//Removes text from the text box
-
 
             string json = JsonConvert.SerializeObject(currentTaskList, Formatting.Indented);//Serializes the task to JSON
             File.WriteAllText(currentTaskListFilePath, json);//writes text into JSON file for storage
@@ -70,10 +67,10 @@ namespace TimCoreyWinFormDemo
 
             string jsonUpdate = File.ReadAllText(completedTaskListFilePath);
 
-            JArray jsonArray = JArray.Parse (jsonUpdate);
+            JArray jsonArray = JArray.Parse(jsonUpdate);
 
-            for (int i = 0; i < jsonArray.Count; i++) 
-            { 
+            for (int i = 0; i < jsonArray.Count; i++)
+            {
                 jsonArray[i].Remove();
             }
 
@@ -99,9 +96,62 @@ namespace TimCoreyWinFormDemo
             }
         }
 
+        private void monthCalendar1_KeyPress(object sender, KeyPressEventArgs e)
+        {
+            if (e.KeyChar == (char)Keys.Enter)//checks if enter key was pressed 
+            {
+                AddTaskButton.PerformClick();//runs AddTaskButton method
+                e.Handled = true;
+            }
+        }
+
+        private void tagComboBox_KeyPress(object sender, KeyPressEventArgs e)
+        {
+            if (e.KeyChar == (char)Keys.Enter)//checks if enter key was pressed 
+            {
+                TagComboBox.Items.Add(TagComboBox.Text);
+            }
+        }
+
+        private void AlphaSortButton_Click(object sender, EventArgs e)
+        {
+            currentTaskList.Sort();
+
+            checkedListBox1.Items.Clear();
+
+            foreach (var task in currentTaskList)
+            {
+                checkedListBox1.Items.Add(task.ToString());
+            }
+        }
+
+        private void DateSortButton_Click(object sender, EventArgs e)
+        {
+            currentTaskList.Sort(new DateComparer());
+
+            checkedListBox1.Items.Clear();
+
+            foreach (var task in currentTaskList)
+            {
+                checkedListBox1.Items.Add(task.ToString());
+            }
+        }
+
+        private void TypeSortButton_Click(object sender, EventArgs e)
+        {
+            currentTaskList.Sort(new TypeComparer());
+
+            checkedListBox1.Items.Clear();
+
+            foreach (var task in currentTaskList)
+            {
+                checkedListBox1.Items.Add(task.ToString());
+            }
+        }
+
         private void checkedListBox1_ItemCheck(object sender, ItemCheckEventArgs e)
         {
-            this.BeginInvoke((MethodInvoker)delegate 
+            this.BeginInvoke((MethodInvoker)delegate
             {
                 int selectedTask = e.Index;
                 Debug.WriteLine(selectedTask.ToString());
@@ -130,27 +180,40 @@ namespace TimCoreyWinFormDemo
             });
         }
 
-        private void monthCalendar1_KeyPress(object sender, KeyPressEventArgs e)
+        private void timer1_Tick(object sender, EventArgs e)
         {
-            if (e.KeyChar == (char)Keys.Enter)//checks if enter key was pressed 
+            DateTime now = DateTime.Now;
+
+            foreach (var task in currentTaskList)
             {
-                AddTaskButton.PerformClick();//runs AddTaskButton method
-                e.Handled = true;
+                if (now.ToString("MM/dd/yyyy") == task.taskDate)
+                {
+                    PopupNotifier popup = new PopupNotifier();
+                    popup.TitleText = "TASK DUE SOON";
+                    popup.ContentText = task.taskName + " is due by the end of today!";
+                    popup.Popup(); 
+
+                    task.setTaskNotified(true);
+
+                }
             }
         }
 
         private void Form1_Load(object sender, EventArgs e)
         {
+            //sets timer for notification logic
+            timer1.Interval = 60000; // 1 minute
+            timer1.Tick += timer1_Tick;
+            timer1.Start();
+
             //gets file path for the current task lists
             string loadCurrentTaskListFilePath = Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments) + "\\CurrentTasklist.json";
-           
-
 
             if (File.Exists(loadCurrentTaskListFilePath))//checks that the file path exists. 
             {
                 string json = File.ReadAllText(loadCurrentTaskListFilePath);//opens JSOn file
 
-                currentTaskList = JsonConvert.DeserializeObject<List<ToDoTask1>>(json);//deserializes list into the currentTaskList list
+                currentTaskList = JsonConvert.DeserializeObject<List<ToDoTask>>(json);//deserializes list into the currentTaskList list
 
                 //adds each task in JSON file into checkedBoxList(current task list)
                 foreach (var task in currentTaskList)
@@ -166,7 +229,7 @@ namespace TimCoreyWinFormDemo
             {
                 string json = File.ReadAllText(loadCompletedTaskListFilePath);//opens JSOn file
 
-                completedTaskList = JsonConvert.DeserializeObject<List<ToDoTask1>>(json);//deserializes list into the currentTaskList list
+                completedTaskList = JsonConvert.DeserializeObject<List<ToDoTask>>(json);//deserializes list into the currentTaskList list
 
                 foreach (var task in completedTaskList)
                 {
@@ -174,5 +237,7 @@ namespace TimCoreyWinFormDemo
                 }
             }
         }
+
+        
     }
 }
