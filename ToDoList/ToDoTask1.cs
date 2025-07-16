@@ -46,6 +46,21 @@ namespace ToDoList
             return (taskName + " " + taskDate + " Tag: " + taskType);
         }
 
+        public string getTaskName()
+        {
+            return taskName;
+        }
+
+        public string getTaskDate()
+        {
+            return taskDate;
+        }
+
+        public string getTaskType()
+        {
+            return taskType;
+        }
+
         public int CompareTo(ToDoTask? other)
         {
             return taskName.CompareTo(other.taskName);

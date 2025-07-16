@@ -14,6 +14,7 @@ namespace TimCoreyWinFormDemo
         string currentTaskListFilePath = Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments) + "\\CurrentTasklist.json";
         //file path for the JSON file for the storage of the listbox(completed) tasks 
         string completedTaskListFilePath = Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments) + "\\CompletedTasklist.json";
+        bool isEditing = false;
 
         public Form1()
         {
@@ -22,22 +23,40 @@ namespace TimCoreyWinFormDemo
 
         private void button5_Click(object sender, EventArgs e)//add task button
         {
-            //creates a new ToDoTask1 object and sets it's Name, Date, and Status variables
-            var newTask = new ToDoTask(textBox1.Text, monthCalendar1.SelectionRange.Start.ToString("MM/dd/yyyy"), TagComboBox.Text, false);
+            if (isEditing)
+            {
+                int selectedTask = checkedListBox1.SelectedIndex;
 
-            currentTaskList.Add(newTask);//adds the task to the currentTask list
-            checkedListBox1.Items.Add(newTask.ToString());//Adds the task name and date to the list using the ToDoTask1 ToString
+                var newTask = new ToDoTask(textBox1.Text, monthCalendar1.SelectionRange.Start.ToString("MM/dd/yyyy"), TagComboBox.Text, false);
 
-            textBox1.Text = "";//Removes text from the text box
+                currentTaskList.RemoveAt(selectedTask);
+                currentTaskList.Insert(selectedTask, newTask);
+                checkedListBox1.Items.RemoveAt(selectedTask);
+                checkedListBox1.Items.Insert(selectedTask, newTask);
 
-            string json = JsonConvert.SerializeObject(currentTaskList, Formatting.Indented);//Serializes the task to JSON
-            File.WriteAllText(currentTaskListFilePath, json);//writes text into JSON file for storage
+
+                isEditing = false;
+            }
+            else
+            {
+                //creates a new ToDoTask1 object and sets it's Name, Date, and Status variables
+                var newTask = new ToDoTask(textBox1.Text, monthCalendar1.SelectionRange.Start.ToString("MM/dd/yyyy"), TagComboBox.Text, false);
+
+                currentTaskList.Add(newTask);//adds the task to the currentTask list
+                checkedListBox1.Items.Add(newTask.ToString());//Adds the task name and date to the list using the ToDoTask1 ToString
+
+                textBox1.Text = "";//Removes text from the text box
+
+                string json = JsonConvert.SerializeObject(currentTaskList, Formatting.Indented);//Serializes the task list to JSON
+                File.WriteAllText(currentTaskListFilePath, json);//writes text into JSON file for storage
+            }  
         }
 
         private void button6_Click(object sender, EventArgs e)//remove task button
         {
             //Gets the index of the currently selected task
             int selectedTask = checkedListBox1.SelectedIndex;
+
 
             if (selectedTask != -1 || selectedTask > -1)//Checks if a task was selected. If no then a messagebox is shown.
             {
@@ -56,7 +75,7 @@ namespace TimCoreyWinFormDemo
             else
             {
                 //Send message to user in case a task is not seleceted but they press the remove task button
-                MessageBox.Show("Please select a task from the task list to remove.");
+                MessageBox.Show("Please select a task from the to do list to remove.");
             }
         }
 
@@ -123,6 +142,9 @@ namespace TimCoreyWinFormDemo
             {
                 checkedListBox1.Items.Add(task.ToString());
             }
+
+            string json = JsonConvert.SerializeObject(currentTaskList, Formatting.Indented);//Serializes the task list to JSON
+            File.WriteAllText(currentTaskListFilePath, json);//writes text into JSON file for storage
         }
 
         private void DateSortButton_Click(object sender, EventArgs e)
@@ -135,6 +157,9 @@ namespace TimCoreyWinFormDemo
             {
                 checkedListBox1.Items.Add(task.ToString());
             }
+
+            string json = JsonConvert.SerializeObject(currentTaskList, Formatting.Indented);//Serializes the task list to JSON
+            File.WriteAllText(currentTaskListFilePath, json);//writes text into JSON file for storage
         }
 
         private void TypeSortButton_Click(object sender, EventArgs e)
@@ -146,6 +171,27 @@ namespace TimCoreyWinFormDemo
             foreach (var task in currentTaskList)
             {
                 checkedListBox1.Items.Add(task.ToString());
+            }
+
+            string json = JsonConvert.SerializeObject(currentTaskList, Formatting.Indented);//Serializes the task list to JSON
+            File.WriteAllText(currentTaskListFilePath, json);//writes text into JSON file for storage
+        }
+
+        private void editTaskButton_Click(object sender, EventArgs e)
+        {
+            //Gets the index of the currently selected task
+            int selectedTask = checkedListBox1.SelectedIndex;
+
+            if (selectedTask != -1 || selectedTask > -1)//Checks if a task was selected. If no then a messagebox is shown.
+            {
+                isEditing = true;
+                textBox1.Text = currentTaskList[selectedTask].getTaskName();
+                TagComboBox.Text = currentTaskList[selectedTask].getTaskType();
+            }
+            else
+            {
+                //Send message to user in case a task is not seleceted but they press the remove task button
+                MessageBox.Show("Please select a task from the to do list to edit.");
             }
         }
 
@@ -191,7 +237,7 @@ namespace TimCoreyWinFormDemo
                     PopupNotifier popup = new PopupNotifier();
                     popup.TitleText = "TASK DUE SOON";
                     popup.ContentText = task.taskName + " is due by the end of today!";
-                    popup.Popup(); 
+                    popup.Popup();
 
                     task.setTaskNotified(true);
 
@@ -238,6 +284,6 @@ namespace TimCoreyWinFormDemo
             }
         }
 
-        
+       
     }
 }

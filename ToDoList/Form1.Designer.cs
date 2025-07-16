@@ -48,6 +48,7 @@
             DateSortButton = new Button();
             notifyIcon1 = new NotifyIcon(components);
             timer1 = new System.Windows.Forms.Timer(components);
+            editTaskButton = new Button();
             SuspendLayout();
             // 
             // textBox1
@@ -223,11 +224,22 @@
             // 
             timer1.Tick += timer1_Tick;
             // 
+            // editTaskButton
+            // 
+            editTaskButton.Location = new Point(712, 147);
+            editTaskButton.Name = "editTaskButton";
+            editTaskButton.Size = new Size(139, 23);
+            editTaskButton.TabIndex = 21;
+            editTaskButton.Text = "Edit Task";
+            editTaskButton.UseVisualStyleBackColor = true;
+            editTaskButton.Click += editTaskButton_Click;
+            // 
             // Form1
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
             ClientSize = new Size(1198, 388);
+            Controls.Add(editTaskButton);
             Controls.Add(DateSortButton);
             Controls.Add(TypeSortButton);
             Controls.Add(AlphaSortButton);
@@ -271,5 +283,6 @@
         private Button DateSortButton;
         private NotifyIcon notifyIcon1;
         private System.Windows.Forms.Timer timer1;
+        private Button editTaskButton;
     }
 }
