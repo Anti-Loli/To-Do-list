@@ -49,11 +49,12 @@
             notifyIcon1 = new NotifyIcon(components);
             timer1 = new System.Windows.Forms.Timer(components);
             editTaskButton = new Button();
+            UserFeedbackLabel = new Label();
             SuspendLayout();
             // 
             // textBox1
             // 
-            textBox1.Location = new Point(106, 60);
+            textBox1.Location = new Point(486, 60);
             textBox1.Name = "textBox1";
             textBox1.Size = new Size(227, 23);
             textBox1.TabIndex = 3;
@@ -61,7 +62,7 @@
             // 
             // AddTaskButton
             // 
-            AddTaskButton.Location = new Point(161, 329);
+            AddTaskButton.Location = new Point(541, 329);
             AddTaskButton.Name = "AddTaskButton";
             AddTaskButton.Size = new Size(103, 23);
             AddTaskButton.TabIndex = 4;
@@ -71,7 +72,7 @@
             // 
             // RemoveTaskButton
             // 
-            RemoveTaskButton.Location = new Point(460, 329);
+            RemoveTaskButton.Location = new Point(850, 329);
             RemoveTaskButton.Name = "RemoveTaskButton";
             RemoveTaskButton.Size = new Size(103, 23);
             RemoveTaskButton.TabIndex = 5;
@@ -81,7 +82,7 @@
             // 
             // monthCalendar1
             // 
-            monthCalendar1.Location = new Point(106, 111);
+            monthCalendar1.Location = new Point(486, 111);
             monthCalendar1.MaxSelectionCount = 1;
             monthCalendar1.Name = "monthCalendar1";
             monthCalendar1.TabIndex = 6;
@@ -90,7 +91,7 @@
             // checkedListBox1
             // 
             checkedListBox1.FormattingEnabled = true;
-            checkedListBox1.Location = new Point(361, 59);
+            checkedListBox1.Location = new Point(741, 59);
             checkedListBox1.Name = "checkedListBox1";
             checkedListBox1.Size = new Size(345, 256);
             checkedListBox1.TabIndex = 7;
@@ -100,7 +101,7 @@
             // label2
             // 
             label2.AutoSize = true;
-            label2.Location = new Point(61, 63);
+            label2.Location = new Point(441, 63);
             label2.Name = "label2";
             label2.Size = new Size(33, 15);
             label2.TabIndex = 8;
@@ -109,7 +110,7 @@
             // label3
             // 
             label3.AutoSize = true;
-            label3.Location = new Point(36, 111);
+            label3.Location = new Point(416, 111);
             label3.Name = "label3";
             label3.Size = new Size(58, 15);
             label3.TabIndex = 9;
@@ -119,7 +120,7 @@
             // 
             listBox1.FormattingEnabled = true;
             listBox1.ItemHeight = 15;
-            listBox1.Location = new Point(880, 59);
+            listBox1.Location = new Point(1260, 59);
             listBox1.Margin = new Padding(3, 2, 3, 2);
             listBox1.Name = "listBox1";
             listBox1.Size = new Size(303, 259);
@@ -129,7 +130,7 @@
             // 
             label4.AutoSize = true;
             label4.Font = new Font("Segoe UI", 13.8F, FontStyle.Regular, GraphicsUnit.Point, 0);
-            label4.Location = new Point(962, 22);
+            label4.Location = new Point(1342, 22);
             label4.Name = "label4";
             label4.Size = new Size(152, 25);
             label4.TabIndex = 11;
@@ -137,7 +138,7 @@
             // 
             // CompletedTaskRemoveButton
             // 
-            CompletedTaskRemoveButton.Location = new Point(980, 329);
+            CompletedTaskRemoveButton.Location = new Point(1360, 329);
             CompletedTaskRemoveButton.Margin = new Padding(3, 2, 3, 2);
             CompletedTaskRemoveButton.Name = "CompletedTaskRemoveButton";
             CompletedTaskRemoveButton.Size = new Size(103, 22);
@@ -150,7 +151,7 @@
             // 
             TagComboBox.FormattingEnabled = true;
             TagComboBox.Items.AddRange(new object[] { "Family", "Finance", "Health", "Hobby", "Personal", "School", "Shopping", "Travel", "Work" });
-            TagComboBox.Location = new Point(106, 285);
+            TagComboBox.Location = new Point(486, 285);
             TagComboBox.Name = "TagComboBox";
             TagComboBox.Size = new Size(227, 23);
             TagComboBox.TabIndex = 14;
@@ -160,7 +161,7 @@
             // 
             label5.AutoSize = true;
             label5.Font = new Font("Segoe UI", 13.8F, FontStyle.Regular, GraphicsUnit.Point, 0);
-            label5.Location = new Point(470, 19);
+            label5.Location = new Point(850, 19);
             label5.Name = "label5";
             label5.Size = new Size(93, 25);
             label5.TabIndex = 15;
@@ -170,7 +171,7 @@
             // 
             label1.AutoSize = true;
             label1.Font = new Font("Segoe UI", 13.8F, FontStyle.Regular, GraphicsUnit.Point, 0);
-            label1.Location = new Point(140, 22);
+            label1.Location = new Point(520, 22);
             label1.Name = "label1";
             label1.Size = new Size(145, 25);
             label1.TabIndex = 16;
@@ -179,7 +180,7 @@
             // label6
             // 
             label6.AutoSize = true;
-            label6.Location = new Point(61, 288);
+            label6.Location = new Point(441, 288);
             label6.Name = "label6";
             label6.Size = new Size(29, 15);
             label6.TabIndex = 17;
@@ -187,7 +188,7 @@
             // 
             // AlphaSortButton
             // 
-            AlphaSortButton.Location = new Point(712, 60);
+            AlphaSortButton.Location = new Point(1092, 60);
             AlphaSortButton.Name = "AlphaSortButton";
             AlphaSortButton.Size = new Size(139, 23);
             AlphaSortButton.TabIndex = 18;
@@ -197,7 +198,7 @@
             // 
             // TypeSortButton
             // 
-            TypeSortButton.Location = new Point(712, 118);
+            TypeSortButton.Location = new Point(1092, 118);
             TypeSortButton.Name = "TypeSortButton";
             TypeSortButton.Size = new Size(139, 23);
             TypeSortButton.TabIndex = 19;
@@ -207,7 +208,7 @@
             // 
             // DateSortButton
             // 
-            DateSortButton.Location = new Point(712, 89);
+            DateSortButton.Location = new Point(1092, 89);
             DateSortButton.Name = "DateSortButton";
             DateSortButton.Size = new Size(139, 23);
             DateSortButton.TabIndex = 20;
@@ -226,7 +227,7 @@
             // 
             // editTaskButton
             // 
-            editTaskButton.Location = new Point(712, 147);
+            editTaskButton.Location = new Point(1092, 147);
             editTaskButton.Name = "editTaskButton";
             editTaskButton.Size = new Size(139, 23);
             editTaskButton.TabIndex = 21;
@@ -234,11 +235,23 @@
             editTaskButton.UseVisualStyleBackColor = true;
             editTaskButton.Click += editTaskButton_Click;
             // 
+            // UserFeedbackLabel
+            // 
+            UserFeedbackLabel.AutoSize = true;
+            UserFeedbackLabel.Font = new Font("Segoe UI", 9.75F, FontStyle.Regular, GraphicsUnit.Point, 0);
+            UserFeedbackLabel.Location = new Point(46, 124);
+            UserFeedbackLabel.Name = "UserFeedbackLabel";
+            UserFeedbackLabel.Size = new Size(43, 17);
+            UserFeedbackLabel.TabIndex = 22;
+            UserFeedbackLabel.Text = "label7";
+            UserFeedbackLabel.TextAlign = ContentAlignment.TopCenter;
+            // 
             // Form1
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
-            ClientSize = new Size(1198, 388);
+            ClientSize = new Size(1575, 385);
+            Controls.Add(UserFeedbackLabel);
             Controls.Add(editTaskButton);
             Controls.Add(DateSortButton);
             Controls.Add(TypeSortButton);
@@ -284,5 +297,6 @@
         private NotifyIcon notifyIcon1;
         private System.Windows.Forms.Timer timer1;
         private Button editTaskButton;
+        private Label UserFeedbackLabel;
     }
 }

@@ -34,14 +34,24 @@ namespace TimCoreyWinFormDemo
                 checkedListBox1.Items.RemoveAt(selectedTask);
                 checkedListBox1.Items.Insert(selectedTask, newTask);
 
-
                 isEditing = false;
+
+                UserFeedbackLabel.Text = "Task successfully edited." +
+                                         "\n You didn't just extend the due date did you?";
             }
-            else
+            else if (textBox1.Text == string.Empty)
             {
+                MessageBox.Show("Please enter your task into the task text box.");
+            }
+            else if (TagComboBox.Text == string.Empty)
+            {
+                MessageBox.Show("Please give the task a catergory.");
+            }
+            else 
+            { 
                 //creates a new ToDoTask1 object and sets it's Name, Date, and Status variables
                 var newTask = new ToDoTask(textBox1.Text, monthCalendar1.SelectionRange.Start.ToString("MM/dd/yyyy"), TagComboBox.Text, false);
-
+                               
                 currentTaskList.Add(newTask);//adds the task to the currentTask list
                 checkedListBox1.Items.Add(newTask.ToString());//Adds the task name and date to the list using the ToDoTask1 ToString
 
@@ -49,6 +59,9 @@ namespace TimCoreyWinFormDemo
 
                 string json = JsonConvert.SerializeObject(currentTaskList, Formatting.Indented);//Serializes the task list to JSON
                 File.WriteAllText(currentTaskListFilePath, json);//writes text into JSON file for storage
+
+                UserFeedbackLabel.Text = "Task successfully added." +
+                                         "\n Feel free to add however many you want.";
             }  
         }
 
@@ -71,6 +84,9 @@ namespace TimCoreyWinFormDemo
                 jsonArray.RemoveAt(selectedTask);//Removes the task at the same index as the task
 
                 File.WriteAllText(currentTaskListFilePath, jsonArray.ToString());//Closes the JSON file
+
+                UserFeedbackLabel.Text = "Task successfully removed." +
+                                         "\n Don't worry I'm sure you could have gotten to it.";
             }
             else
             {
@@ -81,19 +97,30 @@ namespace TimCoreyWinFormDemo
 
         private void CompletedTaskRemoveButton_Click(object sender, EventArgs e)
         {
-            listBox1.Items.Clear();
-            completedTaskList.Clear();
-
-            string jsonUpdate = File.ReadAllText(completedTaskListFilePath);
-
-            JArray jsonArray = JArray.Parse(jsonUpdate);
-
-            for (int i = 0; i < jsonArray.Count; i++)
+            if (completedTaskList.Count <= 0)
             {
-                jsonArray[i].Remove();
+                UserFeedbackLabel.Text = "Completed tasks list is empty." +
+                                         "\n Try actually doing your tasks first.";
             }
+            else
+            {
+                listBox1.Items.Clear();
+                completedTaskList.Clear();
 
-            File.WriteAllText(completedTaskListFilePath, jsonArray.ToString());
+                string jsonUpdate = File.ReadAllText(completedTaskListFilePath);
+
+                JArray jsonArray = JArray.Parse(jsonUpdate);
+
+                for (int i = 0; i < jsonArray.Count; i++)
+                {
+                    jsonArray[i].Remove();
+                }
+
+                File.WriteAllText(completedTaskListFilePath, jsonArray.ToString());
+
+                UserFeedbackLabel.Text = "Completed tasks removed." +
+                                             "\n Time for a clean slate you know.";
+            }
         }
 
         private void textBox1_KeyPress(object sender, KeyPressEventArgs e)
@@ -222,6 +249,9 @@ namespace TimCoreyWinFormDemo
 
                     string json = JsonConvert.SerializeObject(completedTaskList, Formatting.Indented);//Serializes the task to JSON
                     File.WriteAllText(completedTaskListFilePath, json);//writes text into JSON file for storage
+
+                    UserFeedbackLabel.Text = "Task completed." +
+                                             "\n Good job.";
                 }
             });
         }
@@ -241,6 +271,8 @@ namespace TimCoreyWinFormDemo
 
                     task.setTaskNotified(true);
 
+                    UserFeedbackLabel.Text = "Task notification!" +
+                                             "\n Check your screen.";
                 }
             }
         }
@@ -282,6 +314,11 @@ namespace TimCoreyWinFormDemo
                     listBox1.Items.Add(task.ToString());
                 }
             }
+
+            UserFeedbackLabel.Text = "Welcome to the the Minimalist To-Do list program." +
+                                     "\nStart by making a new task." +
+                                     "\nSimply type what task you need to do, give it a due date," +
+                                     "\nand add a preset or custom catergory for easier organization.";
         }
 
        
