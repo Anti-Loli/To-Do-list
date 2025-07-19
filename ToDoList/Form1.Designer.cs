@@ -55,7 +55,7 @@
             // textBox1
             // 
             textBox1.Anchor = AnchorStyles.None;
-            textBox1.Location = new Point(318, 115);
+            textBox1.Location = new Point(344, 115);
             textBox1.Name = "textBox1";
             textBox1.Size = new Size(227, 23);
             textBox1.TabIndex = 3;
@@ -64,7 +64,7 @@
             // AddTaskButton
             // 
             AddTaskButton.Anchor = AnchorStyles.None;
-            AddTaskButton.Location = new Point(373, 384);
+            AddTaskButton.Location = new Point(399, 384);
             AddTaskButton.Name = "AddTaskButton";
             AddTaskButton.Size = new Size(103, 23);
             AddTaskButton.TabIndex = 4;
@@ -75,7 +75,7 @@
             // RemoveTaskButton
             // 
             RemoveTaskButton.Anchor = AnchorStyles.None;
-            RemoveTaskButton.Location = new Point(113, 730);
+            RemoveTaskButton.Location = new Point(139, 730);
             RemoveTaskButton.Name = "RemoveTaskButton";
             RemoveTaskButton.Size = new Size(103, 23);
             RemoveTaskButton.TabIndex = 5;
@@ -86,7 +86,7 @@
             // monthCalendar1
             // 
             monthCalendar1.Anchor = AnchorStyles.None;
-            monthCalendar1.Location = new Point(318, 166);
+            monthCalendar1.Location = new Point(344, 166);
             monthCalendar1.MaxSelectionCount = 1;
             monthCalendar1.Name = "monthCalendar1";
             monthCalendar1.TabIndex = 6;
@@ -96,7 +96,7 @@
             // 
             checkedListBox1.Anchor = AnchorStyles.None;
             checkedListBox1.FormattingEnabled = true;
-            checkedListBox1.Location = new Point(4, 460);
+            checkedListBox1.Location = new Point(30, 460);
             checkedListBox1.Name = "checkedListBox1";
             checkedListBox1.Size = new Size(345, 256);
             checkedListBox1.TabIndex = 7;
@@ -107,7 +107,7 @@
             // 
             label2.Anchor = AnchorStyles.None;
             label2.AutoSize = true;
-            label2.Location = new Point(273, 118);
+            label2.Location = new Point(299, 118);
             label2.Name = "label2";
             label2.Size = new Size(33, 15);
             label2.TabIndex = 8;
@@ -117,7 +117,7 @@
             // 
             label3.Anchor = AnchorStyles.None;
             label3.AutoSize = true;
-            label3.Location = new Point(248, 166);
+            label3.Location = new Point(274, 166);
             label3.Name = "label3";
             label3.Size = new Size(58, 15);
             label3.TabIndex = 9;
@@ -128,7 +128,7 @@
             listBox1.Anchor = AnchorStyles.None;
             listBox1.FormattingEnabled = true;
             listBox1.ItemHeight = 15;
-            listBox1.Location = new Point(500, 460);
+            listBox1.Location = new Point(526, 460);
             listBox1.Margin = new Padding(3, 2, 3, 2);
             listBox1.Name = "listBox1";
             listBox1.Size = new Size(326, 259);
@@ -139,7 +139,7 @@
             label4.Anchor = AnchorStyles.None;
             label4.AutoSize = true;
             label4.Font = new Font("Segoe UI", 13.8F, FontStyle.Regular, GraphicsUnit.Point, 0);
-            label4.Location = new Point(580, 420);
+            label4.Location = new Point(606, 420);
             label4.Name = "label4";
             label4.Size = new Size(152, 25);
             label4.TabIndex = 11;
@@ -148,7 +148,7 @@
             // CompletedTaskRemoveButton
             // 
             CompletedTaskRemoveButton.Anchor = AnchorStyles.None;
-            CompletedTaskRemoveButton.Location = new Point(605, 730);
+            CompletedTaskRemoveButton.Location = new Point(631, 730);
             CompletedTaskRemoveButton.Margin = new Padding(3, 2, 3, 2);
             CompletedTaskRemoveButton.Name = "CompletedTaskRemoveButton";
             CompletedTaskRemoveButton.Size = new Size(103, 22);
@@ -162,7 +162,7 @@
             TagComboBox.Anchor = AnchorStyles.None;
             TagComboBox.FormattingEnabled = true;
             TagComboBox.Items.AddRange(new object[] { "Family", "Finance", "Health", "Hobby", "Personal", "School", "Shopping", "Travel", "Work" });
-            TagComboBox.Location = new Point(318, 340);
+            TagComboBox.Location = new Point(344, 340);
             TagComboBox.Name = "TagComboBox";
             TagComboBox.Size = new Size(227, 23);
             TagComboBox.TabIndex = 14;
@@ -173,7 +173,7 @@
             label5.Anchor = AnchorStyles.None;
             label5.AutoSize = true;
             label5.Font = new Font("Segoe UI", 13.8F, FontStyle.Regular, GraphicsUnit.Point, 0);
-            label5.Location = new Point(113, 420);
+            label5.Location = new Point(139, 420);
             label5.Name = "label5";
             label5.Size = new Size(93, 25);
             label5.TabIndex = 15;
@@ -184,7 +184,7 @@
             label1.Anchor = AnchorStyles.None;
             label1.AutoSize = true;
             label1.Font = new Font("Segoe UI", 13.8F, FontStyle.Regular, GraphicsUnit.Point, 0);
-            label1.Location = new Point(352, 77);
+            label1.Location = new Point(378, 77);
             label1.Name = "label1";
             label1.Size = new Size(145, 25);
             label1.TabIndex = 16;
@@ -194,7 +194,7 @@
             // 
             label6.Anchor = AnchorStyles.None;
             label6.AutoSize = true;
-            label6.Location = new Point(273, 343);
+            label6.Location = new Point(299, 343);
             label6.Name = "label6";
             label6.Size = new Size(29, 15);
             label6.TabIndex = 17;
@@ -203,7 +203,7 @@
             // AlphaSortButton
             // 
             AlphaSortButton.Anchor = AnchorStyles.None;
-            AlphaSortButton.Location = new Point(355, 461);
+            AlphaSortButton.Location = new Point(381, 461);
             AlphaSortButton.Name = "AlphaSortButton";
             AlphaSortButton.Size = new Size(139, 23);
             AlphaSortButton.TabIndex = 18;
@@ -214,7 +214,7 @@
             // TypeSortButton
             // 
             TypeSortButton.Anchor = AnchorStyles.None;
-            TypeSortButton.Location = new Point(355, 519);
+            TypeSortButton.Location = new Point(381, 519);
             TypeSortButton.Name = "TypeSortButton";
             TypeSortButton.Size = new Size(139, 23);
             TypeSortButton.TabIndex = 19;
@@ -225,7 +225,7 @@
             // DateSortButton
             // 
             DateSortButton.Anchor = AnchorStyles.None;
-            DateSortButton.Location = new Point(355, 490);
+            DateSortButton.Location = new Point(381, 490);
             DateSortButton.Name = "DateSortButton";
             DateSortButton.Size = new Size(139, 23);
             DateSortButton.TabIndex = 20;
@@ -245,7 +245,7 @@
             // editTaskButton
             // 
             editTaskButton.Anchor = AnchorStyles.None;
-            editTaskButton.Location = new Point(355, 548);
+            editTaskButton.Location = new Point(381, 548);
             editTaskButton.Name = "editTaskButton";
             editTaskButton.Size = new Size(139, 23);
             editTaskButton.TabIndex = 21;
@@ -257,7 +257,7 @@
             // 
             UserFeedbackLabel.Anchor = AnchorStyles.None;
             UserFeedbackLabel.Font = new Font("Segoe UI", 8.25F, FontStyle.Regular, GraphicsUnit.Point, 0);
-            UserFeedbackLabel.Location = new Point(318, 6);
+            UserFeedbackLabel.Location = new Point(344, 6);
             UserFeedbackLabel.Name = "UserFeedbackLabel";
             UserFeedbackLabel.Size = new Size(227, 71);
             UserFeedbackLabel.TabIndex = 22;
@@ -270,7 +270,7 @@
             AutoScaleMode = AutoScaleMode.Dpi;
             AutoScroll = true;
             AutoSize = true;
-            ClientSize = new Size(838, 793);
+            ClientSize = new Size(875, 793);
             Controls.Add(monthCalendar1);
             Controls.Add(textBox1);
             Controls.Add(AddTaskButton);
