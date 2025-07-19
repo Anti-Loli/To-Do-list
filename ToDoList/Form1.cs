@@ -47,11 +47,11 @@ namespace TimCoreyWinFormDemo
             {
                 MessageBox.Show("Please give the task a catergory.");
             }
-            else 
-            { 
+            else
+            {
                 //creates a new ToDoTask1 object and sets it's Name, Date, and Status variables
                 var newTask = new ToDoTask(textBox1.Text, monthCalendar1.SelectionRange.Start.ToString("MM/dd/yyyy"), TagComboBox.Text, false);
-                               
+
                 currentTaskList.Add(newTask);//adds the task to the currentTask list
                 checkedListBox1.Items.Add(newTask.ToString());//Adds the task name and date to the list using the ToDoTask1 ToString
 
@@ -62,7 +62,7 @@ namespace TimCoreyWinFormDemo
 
                 UserFeedbackLabel.Text = "Task successfully added." +
                                          "\n Feel free to add however many you want.";
-            }  
+            }
         }
 
         private void button6_Click(object sender, EventArgs e)//remove task button
@@ -321,6 +321,11 @@ namespace TimCoreyWinFormDemo
                                      "\nand add a preset or custom catergory for easier organization.";
         }
 
-       
+        private void Form1_Resize(object sender, EventArgs e)
+        {
+            UserFeedbackLabel.Text = "Yeah..." +
+                                     "\n This doesn't really do full screen..." +
+                                     "\nSorry about that.";
+        }
     }
 }
