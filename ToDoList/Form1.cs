@@ -156,6 +156,8 @@ namespace TimCoreyWinFormDemo
             if (e.KeyChar == (char)Keys.Enter)//checks if enter key was pressed 
             {
                 TagComboBox.Items.Add(TagComboBox.Text);
+                AddTaskButton.PerformClick();//runs AddTaskButton method
+                e.Handled = true;
             }
         }
 
