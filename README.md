@@ -4,7 +4,7 @@
   <br>
 </h1>
 
-<h4 align="center">A minimal to do list desktop app built in C# using the >NET framework</a>.</h4>
+<h4 align="center">A minimal to do list desktop app built in C# using the .NET framework</a>.</h4>
 
 ## Features
 
